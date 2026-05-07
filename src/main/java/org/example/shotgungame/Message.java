@@ -1,0 +1,60 @@
+package org.example.shotgungame;
+
+import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class Message implements Serializable {
+    private static final long serialVersionUID = 1234567L;
+    Integer version = 1;
+    Integer mode;
+    // 1: START
+    // 2: COMMUNICATE
+    // 3: STOP
+    String text;
+    String from;
+
+    //LocalDate timeStamp;
+    //Media voice;
+    //Image picture;
+
+    public Message( Integer mode, String text) throws UnknownHostException {
+        this.mode = mode;
+        this.text = text;
+        this.from = InetAddress.getLocalHost().getHostAddress();
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Integer getMode() {
+        return mode;
+    }
+
+    public void setMode(Integer mode) {
+        this.mode = mode;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "version=" + version +
+                ", mode=" + mode +
+                ", text='" + text + '\'' +
+                ", from='" + from + '\'' +
+                '}';
+    }
+}
