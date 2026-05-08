@@ -19,5 +19,9 @@ public class lobbySelectController {
         CommunicationIn myCommunicationIn = new CommunicationIn(newConnection, false);
         Thread communicationInThread = new Thread(myCommunicationIn);
         communicationInThread.start();
+
+        Message startMessage = new Message(1,"hi","alex");
+        newConnection.getOutStream().writeObject(startMessage);
+        newConnection.getOutStream().flush();
     }
 }

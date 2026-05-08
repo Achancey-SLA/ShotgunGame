@@ -15,13 +15,9 @@ public class CommunicationOut implements Runnable {
             // WRITE TO SOCKET
             for (CommunicationConnection eachConnection : Server.allConnections) {
                 try {
-                    // check if message.to matches socket's name
-                    if (message.to.equalsIgnoreCase("ALL") || message.to.equalsIgnoreCase(eachConnection.getName())) {
                         eachConnection.getOutStream().writeObject(message);
                         eachConnection.getOutStream().flush();
-                        System.out.println("CommunicationOut  to: " + eachConnection.getName() + ": " + message);
-                    }
-                    if (message.to.equalsIgnoreCase(eachConnection.getName()) && message.getMode() == 3){
+                    if (message.from.equalsIgnoreCase(eachConnection.getName()) && message.getMode() == 3){
                         connectionsToDisconnect.add(eachConnection);
                     }
                 } catch (IOException e) {

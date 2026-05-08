@@ -9,7 +9,7 @@ public class Message implements Serializable {
     Integer version = 1;
     Integer mode;
     // 1: START
-    // 2: COMMUNICATE
+
     // 3: STOP
     String text;
     String from;
@@ -18,10 +18,15 @@ public class Message implements Serializable {
     //Media voice;
     //Image picture;
 
+    public Message( Integer mode, String text,String from) throws UnknownHostException {
+        this.mode = mode;
+        this.text = text;
+        this.from = from;
+    }
     public Message( Integer mode, String text) throws UnknownHostException {
         this.mode = mode;
         this.text = text;
-        this.from = InetAddress.getLocalHost().getHostAddress();
+        this.from = "SERVER";
     }
 
     public Integer getVersion() {
