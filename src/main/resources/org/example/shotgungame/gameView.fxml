@@ -12,9 +12,9 @@
          <font>
             <Font size="45.0" />
          </font></Button>
-      <Button layoutX="127.0" layoutY="472.0" mnemonicParsing="false" prefHeight="145.0" prefWidth="158.0" text="Shoot" />
-      <Button layoutX="463.0" layoutY="469.0" mnemonicParsing="false" prefHeight="145.0" prefWidth="158.0" text="Block" />
-      <Button layoutX="800.0" layoutY="469.0" mnemonicParsing="false" prefHeight="145.0" prefWidth="158.0" text="Load" />
+      <Button fx:id="shootButton" layoutX="127.0" layoutY="472.0" mnemonicParsing="false" onAction="#shoot" prefHeight="145.0" prefWidth="158.0" text="Shoot" />
+      <Button fx:id="blockButton" layoutX="463.0" layoutY="469.0" mnemonicParsing="false" onAction="#block" prefHeight="145.0" prefWidth="158.0" text="Block" />
+      <Button fx:id="loadButton" layoutX="800.0" layoutY="469.0" mnemonicParsing="false" onAction="#load" prefHeight="145.0" prefWidth="158.0" text="Load" />
       <Label layoutX="225.0" layoutY="627.0" prefHeight="32.0" prefWidth="111.0" text="Username">
          <font>
             <Font size="21.0" />

@@ -22,6 +22,15 @@ public class CommunicationConnection {
         return name;
     }
 
+    public void sendMessage(Message message){
+        try {
+            outStream.writeObject(message);
+            outStream.flush();
+        }
+        catch (Exception e){
+            System.out.println(e + "in communication connection");
+        }
+    }
     public void setName(String name) {
         System.out.println("Connection " + socket.getInetAddress() + ":" + socket.getPort() + " is client: " + name);
         this.name = name;

@@ -9,8 +9,11 @@ public class Message implements Serializable {
     Integer version = 1;
     Integer mode;
     // 1: START
-
+    // 2: confirm room joined
     // 3: STOP
+    //4: shoot
+    //5: reload
+    //6: block
     String text;
     String from;
 

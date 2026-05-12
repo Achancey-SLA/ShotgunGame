@@ -25,7 +25,7 @@ public class GameController {
     void messagesIn(){
         while(true){
             try {
-                System.out.println(myObjInput.read());
+                System.out.println(myObjInput.readObject());
             } catch (Exception e) {
                 System.out.println(e);
             }
