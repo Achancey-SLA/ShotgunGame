@@ -13,8 +13,8 @@ public class Room implements Runnable {
     public void run(){
         System.out.println("room");
         try {
-            this.connection1.sendMessage(new Message(2, "Joined Room"));
-            this.connection2.sendMessage(new Message(2, "Joined Room"));
+            this.connection1.sendMessage(new Message(2, connection2.getName()));
+            this.connection2.sendMessage(new Message(2, connection1.getName()));
         }
         catch (Exception e){}
 

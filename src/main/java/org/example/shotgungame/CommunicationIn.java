@@ -20,6 +20,7 @@ public class CommunicationIn implements Runnable {
             Message outMessage = null;
             try {
                 inMessage = (Message)myConnection.getInStream().readObject();
+                myConnection.setName(inMessage.from);
                 System.out.println("got message"+inMessage);
             } catch (Exception ex) {
                 System.out.println("CommunicationIn failed connection with:" + myConnection.getName() + ": " + ex);
