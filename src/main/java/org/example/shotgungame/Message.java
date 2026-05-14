@@ -13,7 +13,11 @@ public class Message implements Serializable {
     // 3: STOP
     //4: shoot
     //5: reload
-    //6: block
+
+    //6: block (server sends these messages back to say what the opponent did)
+
+    //7: win game
+    //8: lose game
     String text;
     String from;
 
@@ -26,7 +30,9 @@ public class Message implements Serializable {
         this.text = text;
         this.from = from;
     }
-    public Message( Integer mode, String text) throws UnknownHostException {
+
+
+    public Message(Integer mode, String text) throws UnknownHostException {
         this.mode = mode;
         this.text = text;
         this.from = "SERVER";

@@ -21,7 +21,7 @@ public class CommunicationIn implements Runnable {
             try {
                 inMessage = (Message)myConnection.getInStream().readObject();
                 myConnection.setName(inMessage.from);
-                System.out.println("got message"+inMessage);
+                System.out.println("got start message"+inMessage);
             } catch (Exception ex) {
                 System.out.println("CommunicationIn failed connection with:" + myConnection.getName() + ": " + ex);
                 System.out.println("Automatically stopped connection due to error");
@@ -34,7 +34,10 @@ public class CommunicationIn implements Runnable {
                 try {
                     outMessage = new Message(1,"added to queue");
                     Server.queuedPlayers.add(myConnection);
-                } catch (UnknownHostException e) {
+                    myConnection.getOutStream().writeObject(outMessage);
+                    myConnection.getOutStream().flush();
+                    break;
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -48,6 +51,6 @@ public class CommunicationIn implements Runnable {
 
         }
 
-        System.out.println("CommunicationIn bye: " + myConnection.getName());
+        System.out.println("finished connecting: " + myConnection.getName());
     }
 }

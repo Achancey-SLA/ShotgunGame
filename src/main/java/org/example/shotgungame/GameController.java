@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class GameController {
     public Button startButton;
@@ -55,14 +56,15 @@ public class GameController {
             }
         }
     }
-    public void shoot(){
-
+    public void shoot() throws Exception{
+        gameConnection.sendMessage(new Message(4,"",name));
     }
-    public void block(){
-
+    public void block() throws Exception {
+        Message blockMessage = new Message(6,"e",name);
+        gameConnection.sendMessage(blockMessage);
     }
-    public void load(){
-
+    public void load() throws Exception {
+        gameConnection.sendMessage(new Message(5,"",name));
     }
     public void nameTyped(){
         startButton.setDisable(false);
@@ -80,8 +82,7 @@ public class GameController {
             Thread communicationInThread = new Thread(this::messagesIn);
             communicationInThread.start();
             Message startMessage = new Message(1, "hi", name);
-            gameConnection.getOutStream().writeObject(startMessage);
-            gameConnection.getOutStream().flush();
+            gameConnection.sendMessage(startMessage);
         }
         catch(Exception e){
             System.out.println(e);
