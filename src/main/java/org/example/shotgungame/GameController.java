@@ -38,8 +38,9 @@ public class GameController {
         while(true){
             try {
                 message = (Message) myObjInput.readObject();
+                System.out.println("read message from server");
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println(e.getStackTrace());
             }
             System.out.println(message);
             if(message.mode ==1){
@@ -55,6 +56,7 @@ public class GameController {
                 });
             }
         }
+
     }
     public void shoot() throws Exception{
         gameConnection.sendMessage(new Message(4,"",name));

@@ -36,7 +36,6 @@ public class CommunicationIn implements Runnable {
                     Server.queuedPlayers.add(myConnection);
                     myConnection.getOutStream().writeObject(outMessage);
                     myConnection.getOutStream().flush();
-                    break;
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -48,7 +47,10 @@ public class CommunicationIn implements Runnable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
+            if(3<inMessage.mode&&inMessage.mode<7) {
+                myConnection.selection = inMessage.getMode();
+                System.out.println("set connection selection to "+myConnection.selection);
+            }
         }
 
         System.out.println("finished connecting: " + myConnection.getName());

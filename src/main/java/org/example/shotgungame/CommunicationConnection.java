@@ -9,6 +9,7 @@ public class CommunicationConnection {
     private Socket socket;
     private ObjectInputStream inStream;
     private ObjectOutputStream outStream;
+    public int selection;
 
     public CommunicationConnection(String name, Socket socket, ObjectInputStream inStream, ObjectOutputStream outStream) {
         System.out.println("Connected to: " + socket.getInetAddress() + ":" + socket.getPort());
