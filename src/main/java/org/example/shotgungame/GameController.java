@@ -19,6 +19,7 @@ public class GameController {
     public Button blockButton;
     public Button loadButton;
     String name;
+    String enemyName;
     public TextField nameField;
     InputStream inStream;
     CommunicationConnection gameConnection;
@@ -26,6 +27,7 @@ public class GameController {
     public Label bulletText;
     public Label waitingText;
     public Label enemyNameText;
+    public Label infoLabel;
     ObjectInputStream myObjInput;
     public void initialize() throws Exception {
         startButton.setDisable(true);
@@ -42,6 +44,7 @@ public class GameController {
             } catch (Exception e) {
                 System.out.println(e.getStackTrace());
             }
+            final Message m = message;
             System.out.println(message);
             if(message.mode ==1){
                 waitingText.setVisible(true);
@@ -50,23 +53,64 @@ public class GameController {
                 waitingText.setVisible(false);
                 blockButton.setDisable(false);
                 loadButton.setDisable(false);
-                final Message m = message;
                 Platform.runLater(()->{
                     enemyNameText.setText(m.text);
+                    enemyName = m.text;
                 });
+            }
+            if(message.mode>3&&message.mode<7){
+                Platform.runLater(()->{
+                    enableButtons();
+                    if(m.mode == 4){
+                        infoLabel.setText(enemyName+" shot at you");
+                    }
+                    if(m.mode == 5){
+                        infoLabel.setText(enemyName+" reloaded");
+                    }
+                    if(m.mode == 6){
+                        infoLabel.setText(enemyName+" blocked");
+                    }
+                });
+
+            }
+            if(message.mode==7){
+                infoLabel.setText("you win!");
             }
         }
 
     }
+    public void enableButtons(){
+        blockButton.setDisable(false);
+        loadButton.setDisable(false);
+        if(bullets>0){
+            shootButton.setDisable(false);
+        }
+    }
+
+    public void disableButtons(){
+        blockButton.setDisable(true);
+        loadButton.setDisable(true);
+        shootButton.setDisable(true);
+    }
     public void shoot() throws Exception{
-        gameConnection.sendMessage(new Message(4,"",name));
+        gameConnection.sendMessage(new Message(4,"shoot",name));
+        System.out.println("shoot");
+        infoLabel.setText("Waiting for opponent...");
+        bullets--;
+        disableButtons();
     }
     public void block() throws Exception {
-        Message blockMessage = new Message(6,"e",name);
-        gameConnection.sendMessage(blockMessage);
+        gameConnection.sendMessage(new Message(6,"block",name));
+        System.out.println("block");
+        infoLabel.setText("Waiting for opponent...");
+        disableButtons();
     }
     public void load() throws Exception {
-        gameConnection.sendMessage(new Message(5,"",name));
+        gameConnection.sendMessage(new Message(5,"load",name));
+        System.out.println("load");
+        infoLabel.setText("Waiting for opponent...");
+        bullets++;
+        disableButtons();
     }
     public void nameTyped(){
         startButton.setDisable(false);

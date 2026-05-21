@@ -36,5 +36,10 @@
             <Font size="41.0" />
          </font>
       </Label>
+      <Label fx:id="infoLabel" layoutX="163.0" layoutY="158.0" prefHeight="116.0" prefWidth="784.0">
+         <font>
+            <Font size="57.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

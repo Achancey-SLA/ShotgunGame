@@ -18,6 +18,7 @@ public class Message implements Serializable {
 
     //7: win game
     //8: lose game
+    //9: draw game
     String text;
     String from;
 

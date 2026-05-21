@@ -14,19 +14,18 @@ public class CommunicationIn implements Runnable {
 
     @Override
     public void run() {
-        boolean stayConnected = true;
-        while (stayConnected && !Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
             Message inMessage = null;
             Message outMessage = null;
             try {
+                System.out.println("waiting for message from: "+ myConnection.getName());
                 inMessage = (Message)myConnection.getInStream().readObject();
                 myConnection.setName(inMessage.from);
-                System.out.println("got start message"+inMessage);
+                System.out.println("got message"+inMessage);
             } catch (Exception ex) {
                 System.out.println("CommunicationIn failed connection with:" + myConnection.getName() + ": " + ex);
                 System.out.println("Automatically stopped connection due to error");
                 Server.allConnections.remove(myConnection);
-                stayConnected = false;
                 break;
             }
 
@@ -41,12 +40,6 @@ public class CommunicationIn implements Runnable {
                 }
             }
 
-            try {
-                myConnection.getOutStream().writeObject(outMessage);
-                myConnection.getOutStream().flush();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
             if(3<inMessage.mode&&inMessage.mode<7) {
                 myConnection.selection = inMessage.getMode();
                 System.out.println("set connection selection to "+myConnection.selection);
