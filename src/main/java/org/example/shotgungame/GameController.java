@@ -5,11 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -32,8 +31,19 @@ public class GameController {
     public void initialize() throws Exception {
         startButton.setDisable(true);
         bullets = 0;
-        bulletText.setText("bullets: "+bullets);
+        bulletText.setText("Bullets: "+bullets+"/6");
+        ImageView blockImageView = new ImageView(new Image(new FileInputStream("src/Shield.png")));
+        blockImageView.setFitWidth(150);
+        blockImageView.setFitHeight(150);
+        ImageView shootImageView = new ImageView(new Image(new FileInputStream("src/Gun.png")));
+        shootImageView.setFitWidth(150);
+        shootImageView.setFitHeight(150);
+        shootButton.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
+        shootButton.setGraphic(shootImageView);
+        blockButton.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
+        blockButton.setGraphic(blockImageView);
     }
+
 
     void messagesIn(){
         Message message = null;
@@ -94,7 +104,9 @@ public class GameController {
     }
     public void enableButtons(){
         blockButton.setDisable(false);
-        loadButton.setDisable(false);
+        if(bullets<6) {
+            loadButton.setDisable(false);
+        }
         if(bullets>0){
             shootButton.setDisable(false);
         }
@@ -110,7 +122,7 @@ public class GameController {
         System.out.println("shoot");
         infoLabel.setText("Waiting for opponent...");
         bullets--;
-        bulletText.setText("Bullets: "+bullets);
+        bulletText.setText("Bullets: "+bullets+"/6");
         disableButtons();
     }
     public void block() throws Exception {
@@ -124,7 +136,7 @@ public class GameController {
         System.out.println("load");
         infoLabel.setText("Waiting for opponent...");
         bullets++;
-        bulletText.setText("Bullets: "+bullets);
+        bulletText.setText("Bullets: "+bullets+"/6");
         disableButtons();
     }
     public void nameTyped(){
