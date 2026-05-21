@@ -45,11 +45,19 @@ public class Room implements Runnable {
                         connection2.sendMessage(new Message(8,"lose"));
                         connection1.sendMessage(new Message(7,"win"));
                     }
+                    else{
+                        connection1.sendMessage(new Message(connection2.selection,"opponent's choice"));
+                        connection2.sendMessage(new Message(connection1.selection,"opponent's choice"));
+                    }
                 }
                 else if(connection2.selection == 4){
                     if(connection1.selection == 5){
                         connection1.sendMessage(new Message(8,"lose"));
                         connection2.sendMessage(new Message(7,"win"));
+                    }
+                    else{
+                        connection1.sendMessage(new Message(connection2.selection,"opponent's choice"));
+                        connection2.sendMessage(new Message(connection1.selection,"opponent's choice"));
                     }
                 }
                 else{

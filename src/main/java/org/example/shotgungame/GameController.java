@@ -59,6 +59,7 @@ public class GameController {
                 });
             }
             if(message.mode>3&&message.mode<7){
+                System.out.println("recieved enemy move");
                 Platform.runLater(()->{
                     enableButtons();
                     if(m.mode == 4){
@@ -74,7 +75,19 @@ public class GameController {
 
             }
             if(message.mode==7){
-                infoLabel.setText("you win!");
+                Platform.runLater(()-> {
+                    infoLabel.setText("you win!");
+                });
+            }
+            if(message.mode==8){
+                Platform.runLater(()-> {
+                    infoLabel.setText("you got shot :(");
+                });
+            }
+            if(message.mode==9){
+                Platform.runLater(()-> {
+                    infoLabel.setText("it's a tie (both shot)");
+                });
             }
         }
 
@@ -97,6 +110,7 @@ public class GameController {
         System.out.println("shoot");
         infoLabel.setText("Waiting for opponent...");
         bullets--;
+        bulletText.setText("Bullets: "+bullets);
         disableButtons();
     }
     public void block() throws Exception {
@@ -110,6 +124,7 @@ public class GameController {
         System.out.println("load");
         infoLabel.setText("Waiting for opponent...");
         bullets++;
+        bulletText.setText("Bullets: "+bullets);
         disableButtons();
     }
     public void nameTyped(){
