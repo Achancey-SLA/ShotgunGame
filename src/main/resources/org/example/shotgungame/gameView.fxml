@@ -23,7 +23,7 @@
       <TextField fx:id="nameField" layoutX="205.0" layoutY="658.0" onAction="#nameTyped" onKeyTyped="#nameTyped" />
       <Label fx:id="bulletText" layoutX="17.0" layoutY="14.0" prefHeight="78.0" prefWidth="353.0" text="Bullets:">
          <font>
-            <Font size="41.0" />
+            <Font size="40.0" />
          </font>
       </Label>
       <Label fx:id="waitingText" layoutX="370.0" layoutY="632.0" prefHeight="78.0" prefWidth="414.0" text="Waiting for opponent" visible="false">
@@ -39,6 +39,11 @@
       <Label fx:id="infoLabel" layoutX="163.0" layoutY="158.0" prefHeight="116.0" prefWidth="784.0">
          <font>
             <Font size="57.0" />
+         </font>
+      </Label>
+      <Label fx:id="scoreLabel" layoutX="760.0" layoutY="25.0" prefHeight="63.0" prefWidth="290.0" text="Score: 0/0">
+         <font>
+            <Font size="40.0" />
          </font>
       </Label>
    </children>

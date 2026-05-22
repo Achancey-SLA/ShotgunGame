@@ -8,6 +8,8 @@ public class Message implements Serializable {
     private static final long serialVersionUID = 1234567L;
     Integer version = 1;
     Integer mode;
+    Integer num1;
+    Integer num2;
     // 1: START
     // 2: confirm room joined
     // 3: STOP
@@ -19,6 +21,8 @@ public class Message implements Serializable {
     //7: win game
     //8: lose game
     //9: draw game
+    //10: black magic
+    //11: server score report
     String text;
     String from;
 
@@ -30,6 +34,13 @@ public class Message implements Serializable {
         this.mode = mode;
         this.text = text;
         this.from = from;
+    }
+
+    //score report
+    public Message(Integer mode, Integer num1, Integer num2){
+        this.mode = mode;
+        this.num1 = num1;
+        this.num2 = num2;
     }
 
 

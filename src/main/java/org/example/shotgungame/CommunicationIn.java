@@ -40,7 +40,7 @@ public class CommunicationIn implements Runnable {
                 }
             }
 
-            if(3<inMessage.mode&&inMessage.mode<7) {
+            if((3<inMessage.mode&&inMessage.mode<7)||inMessage.mode==10) {
                 myConnection.selection = inMessage.getMode();
                 System.out.println("set connection selection to "+myConnection.selection);
             }

@@ -19,10 +19,13 @@ public class GameController {
     public Button loadButton;
     String name;
     String enemyName;
+    Integer myScore;
+    Integer enemyScore;
     public TextField nameField;
     InputStream inStream;
     CommunicationConnection gameConnection;
     int bullets;
+    public Label scoreLabel;
     public Label bulletText;
     public Label waitingText;
     public Label enemyNameText;
@@ -32,16 +35,17 @@ public class GameController {
         startButton.setDisable(true);
         bullets = 0;
         bulletText.setText("Bullets: "+bullets+"/6");
-        ImageView blockImageView = new ImageView(new Image(new FileInputStream("src/Shield.png")));
-        blockImageView.setFitWidth(150);
-        blockImageView.setFitHeight(150);
-        ImageView shootImageView = new ImageView(new Image(new FileInputStream("src/Gun.png")));
-        shootImageView.setFitWidth(150);
-        shootImageView.setFitHeight(150);
-        shootButton.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
-        shootButton.setGraphic(shootImageView);
-        blockButton.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
-        blockButton.setGraphic(blockImageView);
+        setButtonImage(blockButton,"src/Shield.png");
+        setButtonImage(shootButton,"src/Gun.png");
+        setButtonImage(loadButton,"src/Load.png");
+    }
+
+    void setButtonImage(Button button, String imagePath) throws Exception{
+        ImageView myImageView = new ImageView(new Image(new FileInputStream(imagePath)));
+        myImageView.setFitWidth(button.getPrefWidth());
+        myImageView.setFitHeight(button.getPrefHeight());
+        button.setStyle("-fx-background-color: transparent; -fx-padding: 0;");
+        button.setGraphic(myImageView);
     }
 
 
@@ -85,18 +89,56 @@ public class GameController {
 
             }
             if(message.mode==7){
-                Platform.runLater(()-> {
-                    infoLabel.setText("you win!");
-                });
+                if (message.text.equals("blackMagic")){
+                    Platform.runLater(()-> {
+                        infoLabel.setText("Enemy Removed (win)");
+                    });
+                }
+                else {
+                    Platform.runLater(() -> {
+                        infoLabel.setText("You Win!");
+                    });
+                }
             }
             if(message.mode==8){
-                Platform.runLater(()-> {
-                    infoLabel.setText("you got shot :(");
-                });
+                if (message.text.equals("blackMagic")){
+                    Platform.runLater(()-> {
+                        infoLabel.setText("you lost due to black magic");
+                    });
+                }
+                else {
+                    Platform.runLater(() -> {
+                        infoLabel.setText("you got shot :(");
+                    });
+                }
             }
             if(message.mode==9){
-                Platform.runLater(()-> {
-                    infoLabel.setText("it's a tie (both shot)");
+                if (message.text.equals("blackMagic")){
+                    Platform.runLater(()-> {
+                        infoLabel.setText("draw due to black magic");
+                    });
+                }
+                else {
+                    Platform.runLater(() -> {
+                        infoLabel.setText("draw (both shot)");
+                    });
+                }
+            }
+            if(message.mode==11){
+                try {
+                    setButtonImage(shootButton, "Gun.png");
+                }
+                catch (Exception e){}
+                bullets = 0;
+                shootButton.setDisable(true);
+                blockButton.setDisable(false);
+                loadButton.setDisable(false);
+                enemyScore = message.num2;
+                myScore = message.num1;
+                Platform.runLater(() -> {
+                    infoLabel.setText("new round started");
+                    bulletText.setText("Bullets: " + bullets+"/6");
+                    scoreLabel.setText("Score: " + myScore + "/" + enemyScore);
                 });
             }
         }
@@ -110,6 +152,14 @@ public class GameController {
         if(bullets>0){
             shootButton.setDisable(false);
         }
+        if(bullets>5){
+            try {
+                setButtonImage(shootButton, "src/BlackMagic.png");
+            }
+            catch(Exception e){
+
+            }
+        }
     }
 
     public void disableButtons(){
@@ -118,10 +168,17 @@ public class GameController {
         shootButton.setDisable(true);
     }
     public void shoot() throws Exception{
-        gameConnection.sendMessage(new Message(4,"shoot",name));
+        if(bullets<6) {
+            gameConnection.sendMessage(new Message(4, "shoot", name));
+            bullets--;
+        }
+        else{
+            gameConnection.sendMessage(new Message(10,"blackMagic",name));
+            bullets=0;
+        }
         System.out.println("shoot");
         infoLabel.setText("Waiting for opponent...");
-        bullets--;
+
         bulletText.setText("Bullets: "+bullets+"/6");
         disableButtons();
     }
