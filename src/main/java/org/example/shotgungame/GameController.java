@@ -26,6 +26,7 @@ public class GameController {
     CommunicationConnection gameConnection;
     int bullets;
     public Label scoreLabel;
+    public Label usernameLabel;
     public Label bulletText;
     public Label waitingText;
     public Label enemyNameText;
@@ -35,7 +36,7 @@ public class GameController {
     public void initialize() throws Exception {
         startButton.setDisable(true);
         bullets = 0;
-        bulletText.setText("Bullets: "+bullets+"/6");
+        bulletText.setText("");
         setButtonImage(blockButton,"src/Shield.png");
         setButtonImage(shootButton,"src/Gun.png");
         setButtonImage(loadButton,"src/Load.png");
@@ -70,6 +71,7 @@ public class GameController {
                 blockButton.setDisable(false);
                 loadButton.setDisable(false);
                 Platform.runLater(()->{
+                    bulletText.setText("Bullets: 0/6");
                     enemyNameText.setText(m.text);
                     enemyName = m.text;
                 });
@@ -140,7 +142,7 @@ public class GameController {
                 Platform.runLater(() -> {
                     infoLabel.setText("new round started");
                     bulletText.setText("Bullets: " + bullets+"/6");
-                    scoreLabel.setText("Score: " + myScore + "/" + enemyScore);
+                    scoreLabel.setText("Score: You: " + myScore + ", Them: " + enemyScore);
                 });
             }
         }
@@ -203,10 +205,13 @@ public class GameController {
     }
     public void pressStart(){
         name = nameField.getText();
+        usernameLabel.setVisible(false);
         startButton.setDisable(true);
         startButton.setVisible(false);
+        nameField.setVisible(false);
+        nameField.setDisable(true);
         try {
-            Socket ourSocket = new Socket("127.0.0.1", 12345);
+            Socket ourSocket = new Socket("10.69.32.183", 12345);
             ObjectOutputStream myObjOutput = new ObjectOutputStream(ourSocket.getOutputStream());
             myObjInput = new ObjectInputStream(ourSocket.getInputStream());
             gameConnection = new CommunicationConnection(name, ourSocket, myObjInput, myObjOutput);

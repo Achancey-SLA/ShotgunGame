@@ -16,44 +16,45 @@
             <Image url="@../../../../../Cowboy.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff64" height="119.0" layoutX="741.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="340.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff64" height="119.0" layoutX="-2.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="229.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff64" height="119.0" layoutX="-13.0" layoutY="-23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1096.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff64" height="133.0" layoutX="-8.0" layoutY="586.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="401.0" />
+      <Label fx:id="bulletText" layoutX="15.0" layoutY="606.0" prefHeight="78.0" prefWidth="353.0">
+         <font>
+            <Font name="American Typewriter" size="38.0" />
+         </font>
+      </Label>
       <Button fx:id="startButton" layoutX="17.0" layoutY="624.0" mnemonicParsing="false" onAction="#pressStart" prefHeight="82.0" prefWidth="181.0" text="Start">
          <font>
-            <Font size="45.0" />
+            <Font name="American Typewriter Semibold" size="45.0" />
          </font></Button>
-      <Button fx:id="shootButton" disable="true" layoutX="127.0" layoutY="472.0" mnemonicParsing="false" onAction="#shoot" prefHeight="150.0" prefWidth="150.0" text="Shoot" />
-      <Button fx:id="blockButton" disable="true" layoutX="463.0" layoutY="469.0" mnemonicParsing="false" onAction="#block" prefHeight="150.0" prefWidth="150.0" />
-      <Button fx:id="loadButton" disable="true" layoutX="800.0" layoutY="469.0" mnemonicParsing="false" onAction="#load" prefHeight="150.0" prefWidth="150.0" text="Load" />
-      <Label layoutX="225.0" layoutY="627.0" prefHeight="32.0" prefWidth="111.0" text="Username">
+      <Button fx:id="shootButton" disable="true" layoutX="412.0" layoutY="565.0" mnemonicParsing="false" onAction="#shoot" prefHeight="150.0" prefWidth="150.0" text="Shoot" />
+      <Button fx:id="blockButton" disable="true" layoutX="644.0" layoutY="565.0" mnemonicParsing="false" onAction="#block" prefHeight="150.0" prefWidth="150.0" />
+      <Button fx:id="loadButton" disable="true" layoutX="887.0" layoutY="565.0" mnemonicParsing="false" onAction="#load" prefHeight="150.0" prefWidth="150.0" text="Load" />
+      <Label fx:id="usernameLabel" layoutX="246.0" layoutY="627.0" prefHeight="32.0" prefWidth="111.0" text="Username" textFill="WHITE">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="nameField" layoutX="205.0" layoutY="658.0" onAction="#nameTyped" onKeyTyped="#nameTyped" />
-      <Label fx:id="bulletText" layoutX="17.0" layoutY="14.0" prefHeight="78.0" prefWidth="353.0" text="Bullets:">
+      <TextField fx:id="nameField" layoutX="214.0" layoutY="659.0" onAction="#nameTyped" onKeyTyped="#nameTyped" />
+      <Label fx:id="waitingText" layoutX="10.0" layoutY="10.0" prefHeight="78.0" prefWidth="701.0" text="Waiting for opponent" visible="false">
          <font>
-            <Font size="40.0" />
+            <Font name="American Typewriter" size="42.0" />
          </font>
       </Label>
-      <Label fx:id="waitingText" layoutX="370.0" layoutY="632.0" prefHeight="78.0" prefWidth="701.0" text="Waiting for opponent" textFill="WHITE" visible="false">
+      <Label fx:id="infoLabel" layoutX="7.0" layoutY="-1.0" prefHeight="116.0" prefWidth="784.0">
          <font>
-            <Font size="41.0" />
+            <Font name="American Typewriter" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="enemyNameText" layoutX="645.0" layoutY="125.0" prefHeight="78.0" prefWidth="414.0" textFill="WHITE">
+      <Label fx:id="scoreLabel" layoutX="646.0" layoutY="25.0" prefHeight="63.0" prefWidth="404.0" text="Score: You: 0, Them: 0">
          <font>
-            <Font size="41.0" />
+            <Font name="American Typewriter" size="35.0" />
          </font>
       </Label>
-      <Label fx:id="infoLabel" layoutX="135.0" layoutY="359.0" prefHeight="116.0" prefWidth="784.0" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b89300" height="54.0" layoutX="341.0" layoutY="362.0" stroke="BLACK" strokeType="INSIDE" width="382.0" />
+      <Label fx:id="enemyNameText" alignment="CENTER" contentDisplay="CENTER" layoutX="291.0" layoutY="363.0" prefHeight="50.0" prefWidth="498.0" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
          <font>
-            <Font size="57.0" />
-         </font>
-      </Label>
-      <Label fx:id="scoreLabel" layoutX="760.0" layoutY="25.0" prefHeight="63.0" prefWidth="290.0" text="Score: 0/0">
-         <font>
-            <Font size="40.0" />
+            <Font name="American Typewriter" size="32.0" />
          </font>
       </Label>
    </children>
