@@ -30,6 +30,7 @@ public class GameController {
     public Label waitingText;
     public Label enemyNameText;
     public Label infoLabel;
+    public ImageView bgView;
     ObjectInputStream myObjInput;
     public void initialize() throws Exception {
         startButton.setDisable(true);
@@ -38,6 +39,7 @@ public class GameController {
         setButtonImage(blockButton,"src/Shield.png");
         setButtonImage(shootButton,"src/Gun.png");
         setButtonImage(loadButton,"src/Load.png");
+        bgView.setImage(new Image(new FileInputStream("src/Cowboy.png")));
     }
 
     void setButtonImage(Button button, String imagePath) throws Exception{
@@ -216,6 +218,8 @@ public class GameController {
         }
         catch(Exception e){
             System.out.println(e);
+            waitingText.setVisible(true);
+            waitingText.setText("Error: "+e);
         }
     }
 
